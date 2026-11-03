@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Placement Data Analysis System</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>🎓 Student Placement Data Analysis System</h1>
+    <p>Manage student records and analyse placement performance</p>
+</header>
+
+<main>
+    <section class="cards">
+        <div class="card">
+            <h3>Total Students</h3>
+            <p id="totalStudents">0</p>
+        </div>
+        <div class="card">
+            <h3>Placed Students</h3>
+            <p id="placedStudents">0</p>
+        </div>
+        <div class="card">
+            <h3>Unplaced Students</h3>
+            <p id="unplacedStudents">0</p>
+        </div>
+        <div class="card">
+            <h3>Placement Rate</h3>
+            <p id="placementRate">0%</p>
+        </div>
+        <div class="card">
+            <h3>Average Package</h3>
+            <p id="averagePackage">0 LPA</p>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>📊 Placement Analytics</h2>
+        <div class="charts">
+            <div class="chart-box">
+                <h3>Department-wise Students</h3>
+                <canvas id="departmentChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Company-wise Placements</h3>
+                <canvas id="companyChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>➕ Add Student</h2>
+        <form id="studentForm">
+            <input id="name" placeholder="Student Name" required>
+            <input id="department" placeholder="Department (e.g. CSE)" required>
+            <input id="cgpa" type="number" step="0.01" min="0" max="10"
+                   placeholder="CGPA">
+            <input id="graduationYear" type="number"
+                   placeholder="Graduation Year">
+            <input id="skills" placeholder="Skills">
+            <button type="submit">Add Student</button>
+        </form>
+        <p id="formMessage"></p>
+    </section>
+
+    <section class="panel">
+        <div class="table-heading">
+            <h2>👩‍🎓 Student Records</h2>
+            <button onclick="exportCSV()">Export CSV</button>
+        </div>
+
+        <input id="searchInput" placeholder="Search by name or department">
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>CGPA</th>
+                        <th>Skills</th>
+                        <th>Company</th>
+                        <th>Package (LPA)</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable">
+                    <tr><td colspan="7">Loading student records...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Student Placement Data Analysis System | Python Flask • MySQL • Pandas</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
